@@ -1,9 +1,9 @@
-using foodtopia.Database;
-using foodtopia.Models;
+using foodiestopia.Database;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class GuestRecipeCronJobDeleteService : BackgroundService
     {

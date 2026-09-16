@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Instruction
+namespace foodiestopia.DTOs.Instruction
 {
     public record InstructionUpdateDTO
     (

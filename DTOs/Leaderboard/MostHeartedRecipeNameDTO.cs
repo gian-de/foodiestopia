@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Leaderboard
+namespace foodiestopia.DTOs.Leaderboard
 {
     public record MostHeartedRecipeNameDTO
     (

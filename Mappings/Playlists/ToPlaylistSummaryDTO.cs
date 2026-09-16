@@ -1,10 +1,10 @@
-using foodtopia.DTOs.Country;
-using foodtopia.DTOs.Playlist;
-using foodtopia.DTOs.Recipe;
-using foodtopia.DTOs.User;
-using foodtopia.Models;
+using foodiestopia.DTOs.Country;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.DTOs.User;
+using foodiestopia.Models;
 
-namespace foodtopia.Mappings.Playlists
+namespace foodiestopia.Mappings.Playlists
 {
     public static class PlaylistSummaryExtension
     {

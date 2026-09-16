@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Admin.Moderator
+namespace foodiestopia.DTOs.Admin.Moderator
 {
     public record ModeratorSubmissionReviewDTO
     (

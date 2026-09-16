@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.User
+namespace foodiestopia.DTOs.User
 {
     public record UserTldrDTO
     (

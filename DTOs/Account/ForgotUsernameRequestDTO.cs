@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace foodtopia.DTOs.Account
+namespace foodiestopia.DTOs.Account
 {
     public class ForgotUsernameRequestDTO
     {

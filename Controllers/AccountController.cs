@@ -1,18 +1,18 @@
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using foodtopia.DTOs;
-using foodtopia.DTOs.Account;
-using foodtopia.Interfaces;
-using foodtopia.Models;
-using foodtopia.Services;
+using foodiestopia.DTOs;
+using foodiestopia.DTOs.Account;
+using foodiestopia.Interfaces;
+using foodiestopia.Models;
+using foodiestopia.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace foodtopia.Controllers
+namespace foodiestopia.Controllers
 {
     [Route("api/account")]
     [ApiController]

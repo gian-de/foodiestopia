@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Account
+namespace foodiestopia.DTOs.Account
 {
     public class ResendEmailConfirmationDTO
     {

@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Rating
+namespace foodiestopia.DTOs.Rating
 {
     public record RatingDTO
     (

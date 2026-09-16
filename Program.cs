@@ -1,11 +1,11 @@
 using System.Text;
 using System.Threading.RateLimiting;
-using foodtopia.Database;
-using foodtopia.Interfaces;
-using foodtopia.Interfaces.Admin;
-using foodtopia.Models;
-using foodtopia.Services;
-using foodtopia.Services.Admin;
+using foodiestopia.Database;
+using foodiestopia.Interfaces;
+using foodiestopia.Interfaces.Admin;
+using foodiestopia.Models;
+using foodiestopia.Services;
+using foodiestopia.Services.Admin;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -88,9 +88,15 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        var baseUrl = Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:8000";
+        var apiUrl = Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:5001";
+        var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:3000";
 
-        policy.WithOrigins(baseUrl, "http://localhost:3000", "http://localhost:5001")
+        policy.WithOrigins(
+                frontendUrl,
+                apiUrl,
+                "https://foodiestopia.com",
+                "https://www.foodiestopia.com",
+                "http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });

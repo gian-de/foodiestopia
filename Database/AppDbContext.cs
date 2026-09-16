@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using foodtopia.Models;
-using foodtopia.Database.Seeds;
+using foodiestopia.Models;
+using foodiestopia.Database.Seeds;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-namespace foodtopia.Database
+namespace foodiestopia.Database
 {
     public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {

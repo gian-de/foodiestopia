@@ -1,6 +1,6 @@
-using foodtopia.DTOs.Country;
+using foodiestopia.DTOs.Country;
 
-namespace foodtopia.DTOs.Recipe
+namespace foodiestopia.DTOs.Recipe
 {
     public record RecipeTldrDTO
     (

@@ -1,13 +1,13 @@
-using foodtopia.Database;
-using foodtopia.DTOs.Recipe;
-using foodtopia.DTOs.Recipe.Submission;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
-using foodtopia.Mappings.Recipes;
-using foodtopia.Models;
+using foodiestopia.Database;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.DTOs.Recipe.Submission;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
+using foodiestopia.Mappings.Recipes;
+using foodiestopia.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class RecipeService : IRecipeService
     {

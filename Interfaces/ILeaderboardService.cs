@@ -1,8 +1,8 @@
-using foodtopia.DTOs.Leaderboard;
-using foodtopia.DTOs.Recipe;
-using foodtopia.Helpers;
+using foodiestopia.DTOs.Leaderboard;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.Helpers;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface ILeaderboardService
     {

@@ -1,6 +1,6 @@
-using foodtopia.Models;
+using foodiestopia.Models;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface IJwtTokenService
     {

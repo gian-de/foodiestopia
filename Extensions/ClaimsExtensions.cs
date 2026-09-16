@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace foodtopia.Extensions
+namespace foodiestopia.Extensions
 {
     public static class ClaimsExtensions
     {

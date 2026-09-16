@@ -1,9 +1,9 @@
-using foodtopia.DTOs.Owner;
-using foodtopia.Interfaces;
+using foodiestopia.DTOs.Owner;
+using foodiestopia.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace foodtopia.Controllers
+namespace foodiestopia.Controllers
 {
     [Authorize(Roles = "Owner")]
     [Route("api/owner")]

@@ -1,8 +1,8 @@
-using foodtopia.DTOs.Playlist;
-using foodtopia.DTOs.Playlist.Submission;
-using foodtopia.Helpers;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.DTOs.Playlist.Submission;
+using foodiestopia.Helpers;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface IPlaylistService
     {

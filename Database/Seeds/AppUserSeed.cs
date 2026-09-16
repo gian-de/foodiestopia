@@ -1,7 +1,7 @@
-using foodtopia.Models;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace foodtopia.Database.Seeds
+namespace foodiestopia.Database.Seeds
 {
     public static class AppUserSeed
     {

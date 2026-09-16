@@ -1,9 +1,9 @@
-using foodtopia.DTOs.Country;
-using foodtopia.DTOs.Ingredient;
-using foodtopia.DTOs.Instruction;
-using foodtopia.DTOs.User;
+using foodiestopia.DTOs.Country;
+using foodiestopia.DTOs.Ingredient;
+using foodiestopia.DTOs.Instruction;
+using foodiestopia.DTOs.User;
 
-namespace foodtopia.DTOs.Recipe
+namespace foodiestopia.DTOs.Recipe
 {
     public record RecipeSummaryDTO
     (

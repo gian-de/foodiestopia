@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: reme              # or override via env file
-      POSTGRES_DB: Foodtopia
+      POSTGRES_DB: Foodiestopia
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -25,13 +25,14 @@ services:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=Foodtopia;Username=postgres;Password=reme
+      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=Foodiestopia;Username=postgres;Password=reme
       SEED_OWNER_PASSWORD: ${SEED_OWNER_PASSWORD}
       SEED_DELETEDUSER_PASSWORD: ${SEED_DELETEDUSER_PASSWORD}
-      JWT__Issuer: http://localhost:5001
-      JWT__Audience: http://localhost:5001
+      JWT_ISSUER: http://localhost:5001
+      JWT_AUDIENCE: http://localhost:3000
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
       BASE_URL: http://localhost:5001
+      FRONTEND_URL: http://localhost:3000
     ports:
       - "5001:8080"
 

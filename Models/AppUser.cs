@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace foodtopia.Models
+namespace foodiestopia.Models
 {
     public class AppUser : IdentityUser<Guid>
     {

@@ -1,10 +1,10 @@
-using foodtopia.DTOs.User;
-using foodtopia.Helpers;
-using foodtopia.Interfaces.Admin;
-using foodtopia.Models;
+using foodiestopia.DTOs.User;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces.Admin;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace foodtopia.Services.Admin
+namespace foodiestopia.Services.Admin
 {
     public class SeniorAdminService : ISeniorAdminService
     {
@@ -162,7 +162,7 @@ namespace foodtopia.Services.Admin
             {
                 throw new CannotUnloadAppDomainException($"Cannot modify a {currentRole}'s role.");
             }
-            if (currentRole != "Admin") throw new ArgumentException("User must be an \"Admin\" to be able to demote to \"User\".");
+            if (currentRole != "Admin") throw new ArgumentException("User must be an 'Admin' to be able to demote to \"User\".");
 
             if (currentRoles.Any())
             {
@@ -180,7 +180,7 @@ namespace foodtopia.Services.Admin
             }
 
             var result = await _userManager.AddToRoleAsync(user, "User");
-            if (!result.Succeeded) throw new InvalidOperationException("Failed to add role \"User\" to user.");
+            if (!result.Succeeded) throw new InvalidOperationException("Failed to add role 'User' to user.");
 
             return new UserInfoDTO(
                     Username: user.UserName!,

@@ -1,7 +1,7 @@
-using foodtopia.Models;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace foodtopia.Database;
+namespace foodiestopia.Database;
 
 public static class AppDbSeeder
 {
@@ -23,7 +23,7 @@ public static class AppDbSeeder
                 Id = ownerUserGuid,
                 UserName = "Owner",
                 NormalizedUserName = "OWNER",
-                Email = "owner@foodtopia.com",
+                Email = "owner@foodiestopia.com",
                 EmailConfirmed = true,
             };
 
@@ -48,7 +48,7 @@ public static class AppDbSeeder
             {
                 Id = deletedUserGuid,
                 UserName = "deleted-user",
-                Email = "deleted@foodtopia.com",
+                Email = "deleted@foodiestopia.com",
                 EmailConfirmed = true,
             };
 

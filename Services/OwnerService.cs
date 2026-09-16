@@ -1,11 +1,11 @@
-using foodtopia.Database;
-using foodtopia.DTOs.User;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
-using foodtopia.Models;
+using foodiestopia.Database;
+using foodiestopia.DTOs.User;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class OwnerService : IOwnerService
     {
@@ -86,8 +86,8 @@ namespace foodtopia.Services
             var currentRoles = await _userManager.GetRolesAsync(user);
             var currentRole = currentRoles.FirstOrDefault();
 
-            if (currentRole == "Senior Admin") throw new ArgumentException("User already has the role \"Senior Admin\"");
-            if (currentRole == "Owner") throw new ArgumentException("User has the role \"Owner\". To demote to \"Senior Admin \", use the method for demoting.");
+            if (currentRole == "Senior Admin") throw new ArgumentException("User already has the role 'Senior Admin'");
+            if (currentRole == "Owner") throw new ArgumentException("User has the role 'Owner'. To demote to 'Senior Admin', use the method for demoting.");
 
             if (currentRoles.Any())
             {
@@ -104,7 +104,7 @@ namespace foodtopia.Services
             }
 
             var promotedToSeniorAdminResult = await _userManager.AddToRoleAsync(user, "Senior Admin");
-            if (!promotedToSeniorAdminResult.Succeeded) throw new KeyNotFoundException("Failed to give user the \"Senior Admin \" role");
+            if (!promotedToSeniorAdminResult.Succeeded) throw new KeyNotFoundException("Failed to give user the 'Senior Admin' role");
 
             return new UserInfoDTO(
                 Username: user.UserName!,
@@ -121,9 +121,9 @@ namespace foodtopia.Services
             var currentRoles = await _userManager.GetRolesAsync(user);
             var currentRole = currentRoles.FirstOrDefault();
 
-            if (currentRole == "Senior Admin") throw new ArgumentException("User is already an \"Senior Admin\"");
-            if (currentRole == "Admin") throw new ArgumentException("User has role \"Admin\", use the promote to senior admin method instead of demoting upwards.");
-            if (currentRole == "User") throw new ArgumentException("User has role \"User\", use the promote to senior admin method instead of demoting upwards.");
+            if (currentRole == "Senior Admin") throw new ArgumentException("User is already an 'Senior Admin'");
+            if (currentRole == "Admin") throw new ArgumentException("User has role 'Admin', use the promote to senior admin method instead of demoting upwards.");
+            if (currentRole == "User") throw new ArgumentException("User has role 'User', use the promote to senior admin method instead of demoting upwards.");
 
             if (currentRoles.Any())
             {
@@ -141,7 +141,7 @@ namespace foodtopia.Services
             }
 
             var demotedToSeniorAdminRoleResult = await _userManager.AddToRoleAsync(user, "Senior Admin");
-            if (!demotedToSeniorAdminRoleResult.Succeeded) throw new KeyNotFoundException("Failed to give user the \"Senior Admin \" role");
+            if (!demotedToSeniorAdminRoleResult.Succeeded) throw new KeyNotFoundException("Failed to give user the 'Senior Admin' role");
 
             return new UserInfoDTO(
                 Username: user.UserName!,
@@ -157,8 +157,8 @@ namespace foodtopia.Services
             var currentRoles = await _userManager.GetRolesAsync(user);
             var currentRole = currentRoles.FirstOrDefault();
 
-            if (currentRole == "Admin") throw new ArgumentException("User is already an \"Admin\"");
-            if (currentRole == "User") throw new ArgumentException("User has role \"User\", use the promote to admin method instead of demoting upwards.");
+            if (currentRole == "Admin") throw new ArgumentException("User is already an 'Admin'");
+            if (currentRole == "User") throw new ArgumentException("User has role 'User', use the promote to admin method instead of demoting upwards.");
 
             if (currentRoles.Any())
             {
@@ -176,7 +176,7 @@ namespace foodtopia.Services
             }
 
             var demotedToAdminRoleResult = await _userManager.AddToRoleAsync(user, "Admin");
-            if (!demotedToAdminRoleResult.Succeeded) throw new KeyNotFoundException("Failed to give user the \"Admin \" role");
+            if (!demotedToAdminRoleResult.Succeeded) throw new KeyNotFoundException("Failed to give user the 'Admin' role");
 
             return new UserInfoDTO(
                 Username: user.UserName!,

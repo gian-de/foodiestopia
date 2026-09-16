@@ -1,8 +1,8 @@
-using foodtopia.DTOs.Country;
-using foodtopia.DTOs.Rating;
-using foodtopia.Models;
+using foodiestopia.DTOs.Country;
+using foodiestopia.DTOs.Rating;
+using foodiestopia.Models;
 
-namespace foodtopia.Mappings.Ratings
+namespace foodiestopia.Mappings.Ratings
 {
     public static class RatingExtension
     {
