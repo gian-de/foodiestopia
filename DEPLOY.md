@@ -31,7 +31,9 @@ Host = the droplet public IPv4, user `root`, identity `~/.ssh/id_rsa`.
 
 ## DNS
 
-At the registrar for `foodiestopia.com`, create:
+`foodiestopia.com` currently resolves to Squarespace (`198.185.159.*` / `198.49.23.*`). `api.foodiestopia.com` does **not** exist yet.
+
+In the Squarespace (or registrar) DNS panel for `foodiestopia.com`, create:
 
 | Type | Name | Value | TTL |
 | ---- | ---- | ----- | --- |
