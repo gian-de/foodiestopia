@@ -1,9 +1,9 @@
-using foodtopia.DTOs.Admin.Moderator;
-using foodtopia.DTOs.Playlist;
-using foodtopia.DTOs.Recipe;
-using foodtopia.Helpers;
+using foodiestopia.DTOs.Admin.Moderator;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.Helpers;
 
-namespace foodtopia.Interfaces.Admin
+namespace foodiestopia.Interfaces.Admin
 {
     public interface IModeratorService
     {

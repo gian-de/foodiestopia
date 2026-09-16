@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace foodtopia.Helpers
+namespace foodiestopia.Helpers
 {
     public static class ClaimsHelper
     {

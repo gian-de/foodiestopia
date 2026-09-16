@@ -1,8 +1,8 @@
-using foodtopia.DTOs.Recipe;
-using foodtopia.DTOs.Recipe.Submission;
-using foodtopia.Helpers;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.DTOs.Recipe.Submission;
+using foodiestopia.Helpers;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface IRecipeService
     {

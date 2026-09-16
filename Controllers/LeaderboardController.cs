@@ -1,7 +1,7 @@
-using foodtopia.Interfaces;
+using foodiestopia.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace foodtopia.Controllers
+namespace foodiestopia.Controllers
 {
     [Route("api/leaderboard")]
     public class LeaderboardController : ControllerBase

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace foodtopia.DTOs.Playlist
+namespace foodiestopia.DTOs.Playlist
 {
     public class PlaylistCreateRequestDTO
     {

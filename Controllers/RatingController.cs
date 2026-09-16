@@ -1,10 +1,10 @@
-using foodtopia.DTOs.Rating;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
+using foodiestopia.DTOs.Rating;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace foodtopia.Controllers
+namespace foodiestopia.Controllers
 {
     [Authorize]
     [ApiController]

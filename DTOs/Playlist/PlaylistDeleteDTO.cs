@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Playlist
+namespace foodiestopia.DTOs.Playlist
 {
     public record PlaylistDeleteDTO
     (

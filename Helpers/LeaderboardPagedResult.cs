@@ -1,4 +1,4 @@
-namespace foodtopia.Helpers
+namespace foodiestopia.Helpers
 {
     public class LeaderboardPagedResult<T>
     {

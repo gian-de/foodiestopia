@@ -1,7 +1,7 @@
-using foodtopia.DTOs.Ingredient;
-using foodtopia.DTOs.Instruction;
+using foodiestopia.DTOs.Ingredient;
+using foodiestopia.DTOs.Instruction;
 
-namespace foodtopia.DTOs.Recipe
+namespace foodiestopia.DTOs.Recipe
 {
     public class RecipeUpdateRequestDTO
     {

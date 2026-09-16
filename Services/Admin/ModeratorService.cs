@@ -1,16 +1,16 @@
-using foodtopia.Database;
-using foodtopia.DTOs.Admin.Moderator;
-using foodtopia.DTOs.Playlist;
-using foodtopia.DTOs.Recipe;
-using foodtopia.Helpers;
-using foodtopia.Interfaces.Admin;
-using foodtopia.Mappings.Playlists;
-using foodtopia.Mappings.Recipes;
-using foodtopia.Models;
+using foodiestopia.Database;
+using foodiestopia.DTOs.Admin.Moderator;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces.Admin;
+using foodiestopia.Mappings.Playlists;
+using foodiestopia.Mappings.Recipes;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services.Admin
+namespace foodiestopia.Services.Admin
 {
     public class ModeratorService : IModeratorService
     {

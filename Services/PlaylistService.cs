@@ -1,13 +1,13 @@
-using foodtopia.Database;
-using foodtopia.DTOs.Playlist;
-using foodtopia.DTOs.Playlist.Submission;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
-using foodtopia.Mappings.Playlists;
-using foodtopia.Models;
+using foodiestopia.Database;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.DTOs.Playlist.Submission;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
+using foodiestopia.Mappings.Playlists;
+using foodiestopia.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class PlaylistService : IPlaylistService
     {

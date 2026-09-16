@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace foodtopia.Models
+namespace foodiestopia.Models
 {
     public class Recipe
     {

@@ -1,7 +1,7 @@
-using foodtopia.DTOs.Recipe;
-using foodtopia.DTOs.User;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.DTOs.User;
 
-namespace foodtopia.DTOs.Playlist.Submission
+namespace foodiestopia.DTOs.Playlist.Submission
 {
     public record PlaylistSubmissionDetailsDTO
     (

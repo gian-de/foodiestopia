@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace foodtopia.DTOs.Rating
+namespace foodiestopia.DTOs.Rating
 {
     public class RatingCreateDTO
     {

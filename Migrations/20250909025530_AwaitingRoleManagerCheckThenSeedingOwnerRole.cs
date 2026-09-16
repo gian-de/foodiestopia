@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace foodtopia.Migrations
+namespace foodiestopia.Migrations
 {
     /// <inheritdoc />
     public partial class AwaitingRoleManagerCheckThenSeedingOwnerRole : Migration

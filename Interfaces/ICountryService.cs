@@ -1,6 +1,6 @@
-using foodtopia.DTOs.Country;
+using foodiestopia.DTOs.Country;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface ICountryService
     {

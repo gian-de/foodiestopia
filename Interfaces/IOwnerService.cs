@@ -1,7 +1,7 @@
-using foodtopia.DTOs.User;
-using foodtopia.Helpers;
+using foodiestopia.DTOs.User;
+using foodiestopia.Helpers;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface IOwnerService
     {

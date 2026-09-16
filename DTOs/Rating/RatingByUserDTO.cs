@@ -1,6 +1,6 @@
-using foodtopia.DTOs.Country;
+using foodiestopia.DTOs.Country;
 
-namespace foodtopia.DTOs.Rating
+namespace foodiestopia.DTOs.Rating
 {
     public record RatingByUserDTO
     (

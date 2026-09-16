@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace foodtopia.DTOs
+namespace foodiestopia.DTOs
 {
     public class RegisterDTO
     {

@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Admin
+namespace foodiestopia.DTOs.Admin
 {
     public record PromoteToAdminRoleDTO
     (

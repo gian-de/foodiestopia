@@ -1,12 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using foodtopia.Interfaces;
-using foodtopia.Models;
+using foodiestopia.Interfaces;
+using foodiestopia.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class JwtTokenService : IJwtTokenService
     {

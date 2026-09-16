@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Ingredient
+namespace foodiestopia.DTOs.Ingredient
 {
     public record IngredientDTO
     (

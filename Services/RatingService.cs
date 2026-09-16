@@ -1,12 +1,12 @@
-using foodtopia.Database;
-using foodtopia.DTOs.Rating;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
-using foodtopia.Mappings.Ratings;
-using foodtopia.Models;
+using foodiestopia.Database;
+using foodiestopia.DTOs.Rating;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
+using foodiestopia.Mappings.Ratings;
+using foodiestopia.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class RatingService : IRatingService
     {

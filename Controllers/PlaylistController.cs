@@ -1,11 +1,11 @@
-using foodtopia.DTOs.Playlist;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
-namespace foodtopia.Controllers
+namespace foodiestopia.Controllers
 {
     [Route("api/playlists")]
     public class PlaylistController : ControllerBase

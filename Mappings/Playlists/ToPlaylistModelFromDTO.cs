@@ -1,7 +1,7 @@
-using foodtopia.DTOs.Playlist;
-using foodtopia.Models;
+using foodiestopia.DTOs.Playlist;
+using foodiestopia.Models;
 
-namespace foodtopia.Mappings.Playlists
+namespace foodiestopia.Mappings.Playlists
 {
     public static class PlaylistCreate
     {

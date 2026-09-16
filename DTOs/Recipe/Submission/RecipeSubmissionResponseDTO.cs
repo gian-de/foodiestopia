@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Recipe.Submission
+namespace foodiestopia.DTOs.Recipe.Submission
 {
     public record RecipeSubmissionResponseDTO
     (

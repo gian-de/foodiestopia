@@ -1,4 +1,4 @@
-namespace foodtopia.Database.Seeds
+namespace foodiestopia.Database.Seeds
 {
     public class AppUserSeedUUID
     {

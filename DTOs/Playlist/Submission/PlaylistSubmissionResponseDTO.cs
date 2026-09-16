@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Playlist.Submission
+namespace foodiestopia.DTOs.Playlist.Submission
 {
     public record PlaylistSubmissionResponseDTO
     (

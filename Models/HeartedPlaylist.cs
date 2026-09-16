@@ -1,4 +1,4 @@
-namespace foodtopia.Models
+namespace foodiestopia.Models
 {
     public class HeartedPlaylist
     {

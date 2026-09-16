@@ -1,4 +1,4 @@
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface IEmailService
     {

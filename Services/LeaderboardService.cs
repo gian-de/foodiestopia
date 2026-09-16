@@ -1,12 +1,12 @@
-using foodtopia.Database;
-using foodtopia.DTOs.Leaderboard;
-using foodtopia.DTOs.Recipe;
-using foodtopia.Helpers;
-using foodtopia.Interfaces;
-using foodtopia.Mappings.Recipes;
+using foodiestopia.Database;
+using foodiestopia.DTOs.Leaderboard;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces;
+using foodiestopia.Mappings.Recipes;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class LeaderboardService : ILeaderboardService
     {

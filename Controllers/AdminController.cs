@@ -1,11 +1,11 @@
-using foodtopia.DTOs.Admin;
-using foodtopia.DTOs.Admin.Moderator;
-using foodtopia.Helpers;
-using foodtopia.Interfaces.Admin;
+using foodiestopia.DTOs.Admin;
+using foodiestopia.DTOs.Admin.Moderator;
+using foodiestopia.Helpers;
+using foodiestopia.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace foodtopia.Controllers
+namespace foodiestopia.Controllers
 {
     [ApiController]
     [Route("api")]

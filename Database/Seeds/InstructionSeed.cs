@@ -1,6 +1,6 @@
-using foodtopia.Models;
+using foodiestopia.Models;
 
-namespace foodtopia.Database.Seeds
+namespace foodiestopia.Database.Seeds
 {
     public static class InstructionSeed
     {

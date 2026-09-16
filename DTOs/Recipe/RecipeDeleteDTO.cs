@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Recipe
+namespace foodiestopia.DTOs.Recipe
 {
     public record RecipeDeleteDTO
     (

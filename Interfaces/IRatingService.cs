@@ -1,7 +1,7 @@
-using foodtopia.DTOs.Rating;
-using foodtopia.Helpers;
+using foodiestopia.DTOs.Rating;
+using foodiestopia.Helpers;
 
-namespace foodtopia.Interfaces
+namespace foodiestopia.Interfaces
 {
     public interface IRatingService
     {

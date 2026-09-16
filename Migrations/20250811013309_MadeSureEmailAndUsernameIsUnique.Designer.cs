@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using foodtopia.Database;
+using foodiestopia.Database;
 
 #nullable disable
 
-namespace foodtopia.Migrations
+namespace foodiestopia.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20250811013309_MadeSureEmailAndUsernameIsUnique")]
@@ -175,7 +175,7 @@ namespace foodtopia.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("foodtopia.Models.AppUser", b =>
+            modelBuilder.Entity("foodiestopia.Models.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,7 +339,7 @@ namespace foodtopia.Migrations
                         });
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Country", b =>
+            modelBuilder.Entity("foodiestopia.Models.Country", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -892,7 +892,7 @@ namespace foodtopia.Migrations
                         });
                 });
 
-            modelBuilder.Entity("foodtopia.Models.HeartedPlaylist", b =>
+            modelBuilder.Entity("foodiestopia.Models.HeartedPlaylist", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -917,7 +917,7 @@ namespace foodtopia.Migrations
                     b.ToTable("HeartedPlaylists");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.HeartedRecipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.HeartedRecipe", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1021,7 +1021,7 @@ namespace foodtopia.Migrations
                         });
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Ingredient", b =>
+            modelBuilder.Entity("foodiestopia.Models.Ingredient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1713,7 +1713,7 @@ namespace foodtopia.Migrations
                         });
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Instruction", b =>
+            modelBuilder.Entity("foodiestopia.Models.Instruction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2488,7 +2488,7 @@ namespace foodtopia.Migrations
                         });
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Playlist", b =>
+            modelBuilder.Entity("foodiestopia.Models.Playlist", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2531,7 +2531,7 @@ namespace foodtopia.Migrations
                     b.ToTable("Playlists");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.PlaylistRecipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.PlaylistRecipe", b =>
                 {
                     b.Property<Guid>("PlaylistId")
                         .HasColumnType("uuid");
@@ -2546,7 +2546,7 @@ namespace foodtopia.Migrations
                     b.ToTable("PlaylistRecipes");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Rating", b =>
+            modelBuilder.Entity("foodiestopia.Models.Rating", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2578,7 +2578,7 @@ namespace foodtopia.Migrations
                     b.ToTable("Ratings");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Recipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.Recipe", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2913,7 +2913,7 @@ namespace foodtopia.Migrations
                         });
                 });
 
-            modelBuilder.Entity("foodtopia.Models.VisibilityReview", b =>
+            modelBuilder.Entity("foodiestopia.Models.VisibilityReview", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2963,7 +2963,7 @@ namespace foodtopia.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("foodtopia.Models.AppUser", null)
+                    b.HasOne("foodiestopia.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2972,7 +2972,7 @@ namespace foodtopia.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("foodtopia.Models.AppUser", null)
+                    b.HasOne("foodiestopia.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2987,7 +2987,7 @@ namespace foodtopia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("foodtopia.Models.AppUser", null)
+                    b.HasOne("foodiestopia.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2996,22 +2996,22 @@ namespace foodtopia.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("foodtopia.Models.AppUser", null)
+                    b.HasOne("foodiestopia.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("foodtopia.Models.HeartedPlaylist", b =>
+            modelBuilder.Entity("foodiestopia.Models.HeartedPlaylist", b =>
                 {
-                    b.HasOne("foodtopia.Models.Playlist", null)
+                    b.HasOne("foodiestopia.Models.Playlist", null)
                         .WithMany("HeartedByUsers")
                         .HasForeignKey("PlaylistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("foodtopia.Models.AppUser", "User")
+                    b.HasOne("foodiestopia.Models.AppUser", "User")
                         .WithMany("HeartedPlaylists")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3020,15 +3020,15 @@ namespace foodtopia.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.HeartedRecipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.HeartedRecipe", b =>
                 {
-                    b.HasOne("foodtopia.Models.Recipe", "Recipe")
+                    b.HasOne("foodiestopia.Models.Recipe", "Recipe")
                         .WithMany("HeartedByUsers")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("foodtopia.Models.AppUser", "User")
+                    b.HasOne("foodiestopia.Models.AppUser", "User")
                         .WithMany("HeartedRecipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3039,9 +3039,9 @@ namespace foodtopia.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Ingredient", b =>
+            modelBuilder.Entity("foodiestopia.Models.Ingredient", b =>
                 {
-                    b.HasOne("foodtopia.Models.Recipe", "Recipe")
+                    b.HasOne("foodiestopia.Models.Recipe", "Recipe")
                         .WithMany("Ingredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3050,9 +3050,9 @@ namespace foodtopia.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Instruction", b =>
+            modelBuilder.Entity("foodiestopia.Models.Instruction", b =>
                 {
-                    b.HasOne("foodtopia.Models.Recipe", "Recipe")
+                    b.HasOne("foodiestopia.Models.Recipe", "Recipe")
                         .WithMany("Instructions")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3061,9 +3061,9 @@ namespace foodtopia.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Playlist", b =>
+            modelBuilder.Entity("foodiestopia.Models.Playlist", b =>
                 {
-                    b.HasOne("foodtopia.Models.AppUser", "User")
+                    b.HasOne("foodiestopia.Models.AppUser", "User")
                         .WithMany("Playlists")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3072,15 +3072,15 @@ namespace foodtopia.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.PlaylistRecipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.PlaylistRecipe", b =>
                 {
-                    b.HasOne("foodtopia.Models.Playlist", "Playlist")
+                    b.HasOne("foodiestopia.Models.Playlist", "Playlist")
                         .WithMany("PlaylistRecipes")
                         .HasForeignKey("PlaylistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("foodtopia.Models.Recipe", "Recipe")
+                    b.HasOne("foodiestopia.Models.Recipe", "Recipe")
                         .WithMany("PlaylistRecipes")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3091,15 +3091,15 @@ namespace foodtopia.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Rating", b =>
+            modelBuilder.Entity("foodiestopia.Models.Rating", b =>
                 {
-                    b.HasOne("foodtopia.Models.Recipe", "Recipe")
+                    b.HasOne("foodiestopia.Models.Recipe", "Recipe")
                         .WithMany("Ratings")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("foodtopia.Models.AppUser", "User")
+                    b.HasOne("foodiestopia.Models.AppUser", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -3110,15 +3110,15 @@ namespace foodtopia.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Recipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.Recipe", b =>
                 {
-                    b.HasOne("foodtopia.Models.Country", "Country")
+                    b.HasOne("foodiestopia.Models.Country", "Country")
                         .WithMany("Recipes")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("foodtopia.Models.AppUser", "User")
+                    b.HasOne("foodiestopia.Models.AppUser", "User")
                         .WithMany("Recipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -3128,17 +3128,17 @@ namespace foodtopia.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.VisibilityReview", b =>
+            modelBuilder.Entity("foodiestopia.Models.VisibilityReview", b =>
                 {
-                    b.HasOne("foodtopia.Models.Playlist", "Playlist")
+                    b.HasOne("foodiestopia.Models.Playlist", "Playlist")
                         .WithMany("VisibilityReviews")
                         .HasForeignKey("PlaylistId");
 
-                    b.HasOne("foodtopia.Models.Recipe", "Recipe")
+                    b.HasOne("foodiestopia.Models.Recipe", "Recipe")
                         .WithMany("VisibilityReviews")
                         .HasForeignKey("RecipeId");
 
-                    b.HasOne("foodtopia.Models.AppUser", "ReviewedBy")
+                    b.HasOne("foodiestopia.Models.AppUser", "ReviewedBy")
                         .WithMany()
                         .HasForeignKey("ReviewedById");
 
@@ -3149,7 +3149,7 @@ namespace foodtopia.Migrations
                     b.Navigation("ReviewedBy");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.AppUser", b =>
+            modelBuilder.Entity("foodiestopia.Models.AppUser", b =>
                 {
                     b.Navigation("HeartedPlaylists");
 
@@ -3162,12 +3162,12 @@ namespace foodtopia.Migrations
                     b.Navigation("Recipes");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Country", b =>
+            modelBuilder.Entity("foodiestopia.Models.Country", b =>
                 {
                     b.Navigation("Recipes");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Playlist", b =>
+            modelBuilder.Entity("foodiestopia.Models.Playlist", b =>
                 {
                     b.Navigation("HeartedByUsers");
 
@@ -3176,7 +3176,7 @@ namespace foodtopia.Migrations
                     b.Navigation("VisibilityReviews");
                 });
 
-            modelBuilder.Entity("foodtopia.Models.Recipe", b =>
+            modelBuilder.Entity("foodiestopia.Models.Recipe", b =>
                 {
                     b.Navigation("HeartedByUsers");
 

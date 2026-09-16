@@ -1,10 +1,10 @@
-using foodtopia.Database;
-using foodtopia.DTOs.Country;
-using foodtopia.DTOs.Recipe;
-using foodtopia.Interfaces;
+using foodiestopia.Database;
+using foodiestopia.DTOs.Country;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace foodtopia.Services
+namespace foodiestopia.Services
 {
     public class CountryService : ICountryService
     {

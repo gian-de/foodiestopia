@@ -1,7 +1,7 @@
-using foodtopia.DTOs.Recipe;
-using foodtopia.Models;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.Models;
 
-namespace foodtopia.Mappings.Recipes
+namespace foodiestopia.Mappings.Recipes
 {
     public static class RecipeCreate
     {

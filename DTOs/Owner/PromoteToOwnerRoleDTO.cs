@@ -1,4 +1,4 @@
-namespace foodtopia.DTOs.Owner
+namespace foodiestopia.DTOs.Owner
 {
     public record PromoteToOwnerRoleDTO
     (

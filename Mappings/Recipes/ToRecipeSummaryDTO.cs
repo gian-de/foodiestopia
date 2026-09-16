@@ -1,11 +1,11 @@
-using foodtopia.DTOs.Country;
-using foodtopia.DTOs.Ingredient;
-using foodtopia.DTOs.Instruction;
-using foodtopia.DTOs.Recipe;
-using foodtopia.DTOs.User;
-using foodtopia.Models;
+using foodiestopia.DTOs.Country;
+using foodiestopia.DTOs.Ingredient;
+using foodiestopia.DTOs.Instruction;
+using foodiestopia.DTOs.Recipe;
+using foodiestopia.DTOs.User;
+using foodiestopia.Models;
 
-namespace foodtopia.Mappings.Recipes
+namespace foodiestopia.Mappings.Recipes
 {
     public static class RecipeExtension
     {

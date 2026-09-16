@@ -12,4 +12,4 @@ COPY --from=build /app/out .
 
 EXPOSE 80
 
-ENTRYPOINT ["dotnet", "foodtopia.dll"]
+ENTRYPOINT ["dotnet", "foodiestopia.dll"]
