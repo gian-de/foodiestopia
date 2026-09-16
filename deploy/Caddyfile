@@ -1,0 +1,13 @@
+# TLS for api.foodiestopia.com only. Requires DNS A record:
+#   api.foodiestopia.com -> droplet public IPv4
+#
+# Until DNS/TLS is ready, use Caddyfile.http instead (see docker-compose.prod.yml).
+
+{
+	email noreply@foodiestopia.com
+}
+
+api.foodiestopia.com {
+	encode gzip
+	reverse_proxy api:8080
+}

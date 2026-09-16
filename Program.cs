@@ -7,6 +7,7 @@ using foodiestopia.Models;
 using foodiestopia.Services;
 using foodiestopia.Services.Admin;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
@@ -83,6 +84,15 @@ builder.Services.AddScoped<IPlaylistService, PlaylistService>();
 builder.Services.AddHostedService<GuestRecipeCronJobDeleteService>();
 
 builder.Services.AddControllers();
+
+// Caddy (or any reverse proxy) terminates TLS and forwards proto/client IP.
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    // .NET 9: KnownIPNetworks is .NET 10+. Trust Caddy on the Docker network.
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 builder.Services.AddCors(options =>
 {
@@ -165,8 +175,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseForwardedHeaders();
 app.UseStaticFiles();
-app.UseHttpsRedirection();
+// TLS is terminated by Caddy on the droplet; keep HTTPS redirection for local/dev only.
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseCors();
 

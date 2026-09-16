@@ -1,0 +1,8 @@
+# Temporary HTTP-only reverse proxy (no Let's Encrypt).
+# Use this until the registrar A record for api.foodiestopia.com is live.
+# Point Nuxt BASE_API_URL at http://DROPLET_IP while this is in use.
+
+:80 {
+	encode gzip
+	reverse_proxy api:8080
+}
