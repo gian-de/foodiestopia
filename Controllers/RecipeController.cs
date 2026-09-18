@@ -23,11 +23,12 @@ namespace foodiestopia.Controllers
             [FromQuery] int pageSize = 10,
             [FromQuery] string sortBy = "PublishedAt",
             [FromQuery] string sortDirection = "desc",
-            [FromQuery] string? username = null)
+            [FromQuery] string? username = null,
+            [FromQuery] string? search = null)
         {
             try
             {
-                var recipePagedResult = await _recipeService.GetAllRecipesAsync(page, pageSize, sortBy, sortDirection, username);
+                var recipePagedResult = await _recipeService.GetAllRecipesAsync(page, pageSize, sortBy, sortDirection, username, search);
 
                 return Ok(recipePagedResult);
             }

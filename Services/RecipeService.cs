@@ -21,7 +21,8 @@ namespace foodiestopia.Services
             int pageSize,
             string sortBy,
             string sortDirection,
-            string? username = null)
+            string? username = null,
+            string? search = null)
         {
             if (page < 1 || pageSize < 1) throw new ArgumentException("Page and or Page size must be greater than 0.");
 
@@ -43,11 +44,20 @@ namespace foodiestopia.Services
                                 .Include(r => r.Ingredients)
                                 .Include(r => r.Instructions.OrderBy(ins => ins.Order))
                                 .Include(r => r.Ratings)
+                                .Include(r => r.HeartedByUsers)
                                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(username))
             {
                 recipeQuery = recipeQuery.Where(r => r.User!.UserName!.ToLower() == username.ToLower());
+            }
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var searchTerm = search.Trim().ToLower();
+                recipeQuery = recipeQuery.Where(r =>
+                    r.Name.ToLower().Contains(searchTerm) ||
+                    r.Country.Name.ToLower().Contains(searchTerm));
             }
 
             recipeQuery = sortBy.ToLower() switch
@@ -94,6 +104,7 @@ namespace foodiestopia.Services
                                 .Include(r => r.Ingredients)
                                 .Include(r => r.Instructions.OrderBy(ins => ins.Order))
                                 .Include(r => r.Ratings)
+                                .Include(r => r.HeartedByUsers)
                                 .FirstOrDefaultAsync();
 
             if (recipe is null) throw new KeyNotFoundException($"Recipe with id {recipeId} was not found.");

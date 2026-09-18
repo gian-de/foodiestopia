@@ -91,12 +91,14 @@ builder.Services.AddCors(options =>
         var apiUrl = Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localhost:5001";
         var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:3000";
 
-        policy.WithOrigins(
-                frontendUrl,
-                apiUrl,
-                "https://foodiestopia.com",
-                "https://www.foodiestopia.com",
-                "http://localhost:3000")
+        policy.SetIsOriginAllowed(origin =>
+                origin.StartsWith("http://localhost:", StringComparison.OrdinalIgnoreCase) ||
+                origin.StartsWith("https://localhost:", StringComparison.OrdinalIgnoreCase) ||
+                origin == frontendUrl ||
+                origin == apiUrl ||
+                origin == "https://foodiestopia.com" ||
+                origin == "https://www.foodiestopia.com" ||
+                origin == "http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });

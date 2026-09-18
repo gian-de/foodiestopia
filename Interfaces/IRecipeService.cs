@@ -6,7 +6,7 @@ namespace foodiestopia.Interfaces
 {
     public interface IRecipeService
     {
-        Task<PagedResult<RecipeSummaryDTO>> GetAllRecipesAsync(int page, int pageSize, string sortBy, string sortDirection, string? username);
+        Task<PagedResult<RecipeSummaryDTO>> GetAllRecipesAsync(int page, int pageSize, string sortBy, string sortDirection, string? username, string? search = null);
         Task<RecipeSummaryDTO> GetRecipeByIdAsync(Guid recipeId);
         Task<PagedResult<RecipeSummaryDTO>> GetMyCreatedRecipesAsync(Guid userId, int page, int pageSize, string sortBy, string sortDirection, string? visibility);
         Task<RecipeSummaryDTO> CreateRecipeAsync(Guid userId, RecipeCreateRequestDTO recipeCreateDTO);
