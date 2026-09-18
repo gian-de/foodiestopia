@@ -1,3 +1,7 @@
+# Local development only. Postgres is published on 5432 for host tools (pgAdmin, etc.).
+# Do not use this file on the DigitalOcean droplet — use docker-compose.prod.yml
+# which keeps Postgres on the Docker network only.
+
 version: '3.9'
 
 services:
