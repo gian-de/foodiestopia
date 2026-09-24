@@ -10,6 +10,8 @@ namespace foodiestopia.DTOs.Recipe
         Guid Id,
         string Name,
         string ImageUrl,
+        int PrepTimeMinutes,
+        int CookTimeMinutes,
         int HeartCount,
         double? TasteAverage,
         double? DifficultyAverage,
@@ -22,5 +24,8 @@ namespace foodiestopia.DTOs.Recipe
         CountryDTO Country,
         ICollection<IngredientDTO> Ingredients,
         ICollection<InstructionDTO> Instructions
-    );
+    )
+    {
+        public int TotalTimeMinutes => PrepTimeMinutes + CookTimeMinutes;
+    }
 }

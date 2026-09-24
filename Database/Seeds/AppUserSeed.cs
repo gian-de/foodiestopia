@@ -59,6 +59,86 @@ namespace foodiestopia.Database.Seeds
                     NormalizedEmail = "IRONFIST@EMAIL.COM",
                     EmailConfirmed = true,
                     PasswordHash = passwordHasher.HashPassword(null!,"IronFist1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.BlackWidow,
+                    UserName = "BlackWidow",
+                    NormalizedUserName = "BLACKWIDOW",
+                    Email = "blackwidow@email.com",
+                    NormalizedEmail = "BLACKWIDOW@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "BlackWidow1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.StarLord,
+                    UserName = "StarLord",
+                    NormalizedUserName = "STARLORD",
+                    Email = "starlord@email.com",
+                    NormalizedEmail = "STARLORD@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "StarLord1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.Gamora,
+                    UserName = "Gamora",
+                    NormalizedUserName = "GAMORA",
+                    Email = "gamora@email.com",
+                    NormalizedEmail = "GAMORA@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "Gamora1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.Loki,
+                    UserName = "Loki",
+                    NormalizedUserName = "LOKI",
+                    Email = "loki@email.com",
+                    NormalizedEmail = "LOKI@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "Loki1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.Thor,
+                    UserName = "Thor",
+                    NormalizedUserName = "THOR",
+                    Email = "thor@email.com",
+                    NormalizedEmail = "THOR@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "Thor1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.Wanda,
+                    UserName = "Wanda",
+                    NormalizedUserName = "WANDA",
+                    Email = "wanda@email.com",
+                    NormalizedEmail = "WANDA@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "Wanda1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.Shuri,
+                    UserName = "Shuri",
+                    NormalizedUserName = "SHURI",
+                    Email = "shuri@email.com",
+                    NormalizedEmail = "SHURI@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "Shuri1!")
+                },
+                new AppUser
+                {
+                    Id = AppUserSeedUUID.Miles,
+                    UserName = "Miles",
+                    NormalizedUserName = "MILES",
+                    Email = "miles@email.com",
+                    NormalizedEmail = "MILES@EMAIL.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = passwordHasher.HashPassword(null!, "Miles1!")
                 }
             };
         }

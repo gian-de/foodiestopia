@@ -12,7 +12,21 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-DotNetEnv.Env.Load();
+var aspnetEnv =
+    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+    ?? "Production";
+
+if (string.Equals(aspnetEnv, "Development", StringComparison.OrdinalIgnoreCase))
+{
+    var envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+    if (File.Exists(envPath))
+    {
+        DotNetEnv.Env.Load(envPath, new DotNetEnv.LoadOptions(
+            setEnvVars: true,
+            clobberExistingVars: true,
+            onlyExactPath: true));
+    }
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +65,8 @@ builder.Services.AddAuthentication(options =>
     {
         var signingKey = Environment.GetEnvironmentVariable("JWT_SIGNING_KEY");
         if (string.IsNullOrEmpty(signingKey)) throw new Exception("JWT_SIGNING_KEY env variable in not set.");
+        if (Encoding.UTF8.GetByteCount(signingKey) < 64)
+            throw new Exception("JWT_SIGNING_KEY must be at least 64 characters (512 bits) for HMAC-SHA512.");
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
