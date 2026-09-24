@@ -5,6 +5,8 @@
 
 # dotenv files and password.txt
 .env
+.env.*
+!.env.example
 appsettings.json
 seed_deleteduser_password.txt
 seed_senioradmin_password.txt

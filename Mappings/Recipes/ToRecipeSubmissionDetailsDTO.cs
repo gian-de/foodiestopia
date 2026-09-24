@@ -20,6 +20,8 @@ namespace foodiestopia.Mappings.Recipes
                 RecipeId: recipeModel.Id,
                 Name: recipeModel.Name,
                 ImageUrl: recipeModel.ImageUrl,
+                PrepTimeMinutes: recipeModel.PrepTimeMinutes,
+                CookTimeMinutes: recipeModel.CookTimeMinutes,
                 VisibilityStatus: recipeModel.VisibilityStatus,
                 HeartCount: recipeModel.HeartedByUsers?.Count ?? 0,
                 TasteAverage: recipeModel.Ratings?.Count > 0 ? Math.Round(recipeModel.Ratings.Average(r => r.TasteRating), 2) : null,

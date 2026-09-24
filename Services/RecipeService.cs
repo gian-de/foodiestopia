@@ -22,7 +22,9 @@ namespace foodiestopia.Services
             string sortBy,
             string sortDirection,
             string? username = null,
-            string? search = null)
+            string? search = null,
+            int? maxPrepMinutes = null,
+            int? maxCookMinutes = null)
         {
             if (page < 1 || pageSize < 1) throw new ArgumentException("Page and or Page size must be greater than 0.");
 
@@ -57,7 +59,20 @@ namespace foodiestopia.Services
                 var searchTerm = search.Trim().ToLower();
                 recipeQuery = recipeQuery.Where(r =>
                     r.Name.ToLower().Contains(searchTerm) ||
-                    r.Country.Name.ToLower().Contains(searchTerm));
+                    r.Country.Name.ToLower().Contains(searchTerm) ||
+                    r.Ingredients.Any(i => i.Name.ToLower().Contains(searchTerm)));
+            }
+
+            if (maxPrepMinutes.HasValue)
+            {
+                if (maxPrepMinutes.Value < 0) throw new ArgumentException("maxPrepMinutes cannot be negative.");
+                recipeQuery = recipeQuery.Where(r => r.PrepTimeMinutes <= maxPrepMinutes.Value);
+            }
+
+            if (maxCookMinutes.HasValue)
+            {
+                if (maxCookMinutes.Value < 0) throw new ArgumentException("maxCookMinutes cannot be negative.");
+                recipeQuery = recipeQuery.Where(r => r.CookTimeMinutes <= maxCookMinutes.Value);
             }
 
             recipeQuery = sortBy.ToLower() switch
@@ -229,6 +244,16 @@ namespace foodiestopia.Services
             if (!string.IsNullOrWhiteSpace(recipeUpdateDTO.ImageUrl))
             {
                 recipeModel.ImageUrl = recipeUpdateDTO.ImageUrl;
+            }
+
+            if (recipeUpdateDTO.PrepTimeMinutes.HasValue)
+            {
+                recipeModel.PrepTimeMinutes = recipeUpdateDTO.PrepTimeMinutes.Value;
+            }
+
+            if (recipeUpdateDTO.CookTimeMinutes.HasValue)
+            {
+                recipeModel.CookTimeMinutes = recipeUpdateDTO.CookTimeMinutes.Value;
             }
 
             if (recipeUpdateDTO.Ingredients != null && recipeUpdateDTO.Ingredients.Any())

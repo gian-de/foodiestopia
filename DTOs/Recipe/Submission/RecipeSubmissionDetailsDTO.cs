@@ -9,6 +9,8 @@ namespace foodiestopia.DTOs.Recipe.Submission
         Guid RecipeId,
         string Name,
         string ImageUrl,
+        int PrepTimeMinutes,
+        int CookTimeMinutes,
         string VisibilityStatus,
         int HeartCount,
         double? TasteAverage,

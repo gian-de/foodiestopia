@@ -20,6 +20,8 @@ namespace foodiestopia.Services
 
             var signingKey = Environment.GetEnvironmentVariable("JWT_SIGNING_KEY");
             if (string.IsNullOrEmpty(signingKey)) throw new InvalidOperationException("JWT_SIGNING_KEY environment variable is not set.");
+            if (Encoding.UTF8.GetByteCount(signingKey) < 64)
+                throw new InvalidOperationException("JWT_SIGNING_KEY must be at least 64 characters (512 bits) for HMAC-SHA512.");
 
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey));
         }
