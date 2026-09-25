@@ -76,7 +76,15 @@ namespace foodiestopia.Controllers
                 var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
                 if (!roleResult.Succeeded) return StatusCode(500, new { Message = "Error when trying to add user to role", roleResult.Errors });
 
-                await _emailService.SendEmailConfirmationAsync(appUser.Email, confirmationLink);
+                try
+                {
+                    await _emailService.SendEmailConfirmationAsync(appUser.Email, confirmationLink);
+                }
+                catch
+                {
+                    await _userManager.DeleteAsync(appUser);
+                    throw;
+                }
 
                 return Ok(new NewUserDTO
                 {
