@@ -34,7 +34,15 @@ namespace foodiestopia.Services
             };
 
             message.To.Add(recipientEmail);
-            await smtpClient.SendMailAsync(message);
+            try
+            {
+                await smtpClient.SendMailAsync(message);
+            }
+            catch (SmtpException ex)
+            {
+                var detail = ex.InnerException?.Message ?? ex.Message;
+                throw new InvalidOperationException($"Failure sending mail: {detail}", ex);
+            }
         }
 
         public Task SendEmailConfirmationAsync(string recipientEmail, string confirmationLink)
