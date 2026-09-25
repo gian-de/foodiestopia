@@ -10,9 +10,13 @@ namespace foodiestopia.Services
         {
             var senderEmail = Environment.GetEnvironmentVariable("GMAIL_EMAIL");
             var password = Environment.GetEnvironmentVariable("GMAIL_PASSWORD");
+            if (string.IsNullOrWhiteSpace(senderEmail) || string.IsNullOrWhiteSpace(password))
+            {
+                throw new InvalidOperationException("GMAIL_EMAIL and GMAIL_PASSWORD must be set.");
+            }
+
             var host = "smtp.gmail.com";
             var port = 587; // TLS port number
-            // var port = 465; // SSL port number
 
             using var smtpClient = new SmtpClient(host, port)
             {
@@ -23,7 +27,7 @@ namespace foodiestopia.Services
 
             var message = new MailMessage
             {
-                From = new MailAddress("noreply@foodiestopia.com", "Foodiestopia"),
+                From = new MailAddress(senderEmail, "Foodiestopia"),
                 Subject = subject,
                 Body = htmlBody,
                 IsBodyHtml = true
