@@ -1,54 +1,56 @@
-using System.Net;
-using System.Net.Mail;
+using System.Net.Http.Json;
+using System.Text.Json;
 using foodiestopia.Interfaces;
 
 namespace foodiestopia.Services
 {
     public class EmailService : IEmailService
     {
+        private static readonly HttpClient Http = new()
+        {
+            Timeout = TimeSpan.FromSeconds(20)
+        };
+
         public async Task SendEmailAsync(string recipientEmail, string subject, string htmlBody)
         {
-            var host = Environment.GetEnvironmentVariable("SMTP_HOST") ?? "smtp-relay.brevo.com";
-            var portText = Environment.GetEnvironmentVariable("SMTP_PORT") ?? "587";
-            var user = Environment.GetEnvironmentVariable("SMTP_USER");
-            var password = Environment.GetEnvironmentVariable("SMTP_PASSWORD");
-            var from = Environment.GetEnvironmentVariable("SMTP_FROM") ?? user;
+            var apiKey = Environment.GetEnvironmentVariable("BREVO_API_KEY");
+            var from = Environment.GetEnvironmentVariable("SMTP_FROM");
 
-            if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(from))
+            if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(from))
             {
-                throw new InvalidOperationException("SMTP_USER, SMTP_PASSWORD, and SMTP_FROM must be set.");
+                throw new InvalidOperationException("BREVO_API_KEY and SMTP_FROM must be set.");
             }
 
-            if (!int.TryParse(portText, out var port))
+            using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.brevo.com/v3/smtp/email");
+            request.Headers.Add("api-key", apiKey);
+            request.Headers.Add("accept", "application/json");
+            request.Content = JsonContent.Create(new
             {
-                throw new InvalidOperationException("SMTP_PORT must be a number.");
-            }
+                sender = new { name = "Foodiestopia", email = from },
+                to = new[] { new { email = recipientEmail } },
+                subject,
+                htmlContent = htmlBody
+            });
 
-            using var smtpClient = new SmtpClient(host, port)
-            {
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(user, password)
-            };
+            using var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode) return;
 
-            var message = new MailMessage
-            {
-                From = new MailAddress(from, "Foodiestopia"),
-                Subject = subject,
-                Body = htmlBody,
-                IsBodyHtml = true
-            };
-
-            message.To.Add(recipientEmail);
+            var body = await response.Content.ReadAsStringAsync();
+            var detail = body;
             try
             {
-                await smtpClient.SendMailAsync(message);
+                using var doc = JsonDocument.Parse(body);
+                if (doc.RootElement.TryGetProperty("message", out var message))
+                {
+                    detail = message.GetString() ?? body;
+                }
             }
-            catch (SmtpException ex)
+            catch (JsonException)
             {
-                var detail = ex.InnerException?.Message ?? ex.Message;
-                throw new InvalidOperationException($"Failure sending mail: {detail}", ex);
+                // keep raw body
             }
+
+            throw new InvalidOperationException($"Failure sending mail: {(int)response.StatusCode} {detail}");
         }
 
         public Task SendEmailConfirmationAsync(string recipientEmail, string confirmationLink)
