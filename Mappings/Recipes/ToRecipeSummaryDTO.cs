@@ -11,6 +11,11 @@ namespace foodiestopia.Mappings.Recipes
     {
         public static RecipeSummaryDTO ToRecipeSummaryDTO(this Recipe recipeModel)
         {
+            var imageUrls = recipeModel.ImageUrls?.Where(url => !string.IsNullOrWhiteSpace(url)).ToList()
+                ?? new List<string>();
+            if (imageUrls.Count == 0 && !string.IsNullOrWhiteSpace(recipeModel.ImageUrl))
+                imageUrls.Add(recipeModel.ImageUrl);
+
             return new RecipeSummaryDTO(
                 Id: recipeModel.Id,
                 Name: recipeModel.Name,
@@ -37,7 +42,10 @@ namespace foodiestopia.Mappings.Recipes
                 ),
                 Ingredients: recipeModel.Ingredients.Select(ing => new IngredientDTO(ing.Id, ing.Name, ing.Quantity, ing.Measurement)).ToList(),
                 Instructions: recipeModel.Instructions.Select(inst => new InstructionDTO(inst.Id, inst.Order, inst.Text)).ToList()
-            );
+            )
+            {
+                ImageUrls = imageUrls
+            };
         }
     }
 }

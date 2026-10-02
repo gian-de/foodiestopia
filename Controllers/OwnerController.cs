@@ -154,5 +154,51 @@ namespace foodiestopia.Controllers
                 return StatusCode(500, new { ex.Message });
             }
         }
+
+        [HttpGet("users")]
+        public async Task<IActionResult> FindUser([FromQuery] string username)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(username)) return BadRequest(new { Message = "Username is required." });
+
+                var user = await _ownerService.FindUserAsync(username);
+                return Ok(user);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { ex.Message });
+            }
+        }
+
+        [HttpDelete("users/{userId:guid}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] Guid userId)
+        {
+            try
+            {
+                await _ownerService.DeleteUserAsync(userId);
+                return Ok(new { Message = "Account deleted." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { ex.Message });
+            }
+        }
     }
 }

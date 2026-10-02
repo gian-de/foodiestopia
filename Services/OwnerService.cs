@@ -10,10 +10,13 @@ namespace foodiestopia.Services
     public class OwnerService : IOwnerService
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly AccountService _accountService;
+        private readonly Guid deletedUserGuid = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
-        public OwnerService(UserManager<AppUser> userManager)
+        public OwnerService(UserManager<AppUser> userManager, AccountService accountService)
         {
             _userManager = userManager;
+            _accountService = accountService;
         }
 
         public async Task<PagedResult<UserInfoDTO>> GetAllOwnersAsync(int page = 1, int pageSize = 10)
@@ -183,6 +186,32 @@ namespace foodiestopia.Services
                 Email: user.Email!,
                 Role: "Admin"
             );
+        }
+
+        public async Task<OwnerUserDTO> FindUserAsync(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username.Trim());
+            if (user is null) throw new KeyNotFoundException("User not found.");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return new OwnerUserDTO(
+                Id: user.Id,
+                Username: user.UserName!,
+                Email: user.Email ?? "",
+                Role: roles.FirstOrDefault() ?? "User"
+            );
+        }
+
+        public async Task DeleteUserAsync(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user is null) throw new KeyNotFoundException("User not found.");
+            if (user.Id == deletedUserGuid) throw new ArgumentException("That account cannot be deleted.");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles.Contains("Owner")) throw new UnauthorizedAccessException("The owner account cannot be deleted.");
+
+            await _accountService.DeleteAccountAsync(userId);
         }
     }
 }

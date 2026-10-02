@@ -185,7 +185,10 @@ namespace foodiestopia.Controllers
 
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                var user = await _userManager.FindByNameAsync(loginDTO.Username.ToLowerInvariant());
+                var loginName = loginDTO.Username.Trim();
+                var user = loginName.Contains('@')
+                    ? await _userManager.FindByEmailAsync(loginName)
+                    : await _userManager.FindByNameAsync(loginName);
                 if (user is null) return Unauthorized(incorrectLoginCredentialMessage);
 
                 var validPassword = await _userManager.CheckPasswordAsync(user, loginDTO.Password);

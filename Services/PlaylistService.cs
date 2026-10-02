@@ -237,6 +237,7 @@ namespace foodiestopia.Services
             if (string.IsNullOrWhiteSpace(playlistCreateDTO.Name)) throw new ArgumentException("Playlist name is required and cannot be empty.");
             if (string.IsNullOrWhiteSpace(playlistCreateDTO.SlugText)) throw new ArgumentException("Slug text is required and cannot be empty.");
             if (!playlistCreateDTO.SlugNumber.HasValue) throw new ArgumentException("Slug number is required.");
+            if (string.IsNullOrWhiteSpace(playlistCreateDTO.ImageUrl)) throw new ArgumentException("A playlist image is required.");
 
             string fullSlug = $"{playlistCreateDTO.SlugText.Replace(" ", "_").ToLower()}-{playlistCreateDTO.SlugNumber}";
             bool fullSlugExists = await _context.Playlists.AnyAsync(p => p.FullSlug == fullSlug);

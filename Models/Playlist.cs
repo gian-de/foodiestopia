@@ -20,6 +20,7 @@ namespace foodiestopia.Models
         public string FullSlug { get; set; } = default!;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public string VisibilityStatus { get; set; } = "unlisted";
+        public string? ImageUrl { get; set; }
 
         public Guid UserId { get; set; }
         public AppUser User { get; set; } = default!;

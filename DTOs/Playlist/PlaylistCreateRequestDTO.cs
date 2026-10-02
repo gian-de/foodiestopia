@@ -16,5 +16,8 @@ namespace foodiestopia.DTOs.Playlist
         [Required]
         [Range(0, 9999)]
         public int? SlugNumber { get; set; }
+
+        [Required]
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }

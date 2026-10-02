@@ -14,5 +14,8 @@ namespace foodiestopia.DTOs.Playlist
         int RecipeCount,
         UserTldrDTO User,
         List<RecipeTldrDTO>? Recipes
-    );
+    )
+    {
+        public string? ImageUrl { get; init; }
+    }
 }
