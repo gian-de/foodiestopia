@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using foodiestopia.DTOs;
 using foodiestopia.DTOs.Account;
+using foodiestopia.Helpers;
 using foodiestopia.Interfaces;
 using foodiestopia.Models;
 using foodiestopia.Services;
@@ -322,6 +323,88 @@ namespace foodiestopia.Controllers
             if (!result.Succeeded) return BadRequest("Something went wrong.");
 
             return Ok("Password has been reset successfully.");
+        }
+
+        [Authorize]
+        [HttpPut("username")]
+        public async Task<IActionResult> ChangeUsername([FromBody] ChangeUsernameDTO requestDTO)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (User.IsGuest()) return Unauthorized(new { Message = "Guest accounts cannot change a username." });
+
+            var user = await _userManager.FindByIdAsync(User.GetUserIdFromClaims().ToString());
+            if (user is null) return Unauthorized(new { Message = "User was not found." });
+
+            var username = requestDTO.Username.Trim().ToLowerInvariant();
+            var existing = await _userManager.FindByNameAsync(username);
+            if (existing is not null && existing.Id != user.Id)
+                return BadRequest(new { Message = "That username is already taken." });
+
+            var result = await _userManager.SetUserNameAsync(user, username);
+            if (!result.Succeeded)
+                return BadRequest(new { Message = string.Join(" ", result.Errors.Select(e => e.Description)) });
+
+            return Ok(new { userName = user.UserName, email = user.Email });
+        }
+
+        [Authorize]
+        [HttpPut("email")]
+        public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailDTO requestDTO)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (User.IsGuest()) return Unauthorized(new { Message = "Guest accounts cannot change an email." });
+
+            var user = await _userManager.FindByIdAsync(User.GetUserIdFromClaims().ToString());
+            if (user is null) return Unauthorized(new { Message = "User was not found." });
+
+            var email = requestDTO.Email.Trim().ToLowerInvariant();
+            if (string.Equals(user.Email, email, StringComparison.OrdinalIgnoreCase))
+                return Ok(new { email = user.Email, message = "That is already your email." });
+
+            var existing = await _userManager.FindByEmailAsync(email);
+            if (existing is not null && existing.Id != user.Id)
+                return BadRequest(new { Message = "That email is already in use." });
+
+            var previousEmail = user.Email!;
+            var wasConfirmed = user.EmailConfirmed;
+            var result = await _userManager.SetEmailAsync(user, email);
+            if (!result.Succeeded)
+                return BadRequest(new { Message = string.Join(" ", result.Errors.Select(e => e.Description)) });
+
+            user.EmailConfirmed = false;
+            await _userManager.UpdateAsync(user);
+
+            try
+            {
+                var confirmationLink = await GenerateConfirmationLinkAsync(user);
+                await _emailService.SendEmailConfirmationAsync(user.Email!, confirmationLink);
+            }
+            catch
+            {
+                await _userManager.SetEmailAsync(user, previousEmail);
+                user.EmailConfirmed = wasConfirmed;
+                await _userManager.UpdateAsync(user);
+                return StatusCode(502, new { Message = "Could not send the confirmation email. Your email was not changed." });
+            }
+
+            return Ok(new { email = user.Email, message = "Email updated. Confirm it from your inbox before your next sign-in." });
+        }
+
+        [Authorize]
+        [HttpPut("password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO requestDTO)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (User.IsGuest()) return Unauthorized(new { Message = "Guest accounts cannot change a password." });
+
+            var user = await _userManager.FindByIdAsync(User.GetUserIdFromClaims().ToString());
+            if (user is null) return Unauthorized(new { Message = "User was not found." });
+
+            var result = await _userManager.ChangePasswordAsync(user, requestDTO.CurrentPassword, requestDTO.NewPassword);
+            if (!result.Succeeded)
+                return BadRequest(new { Message = string.Join(" ", result.Errors.Select(e => e.Description)) });
+
+            return Ok(new { message = "Password updated." });
         }
 
         [HttpDelete("delete-account")]

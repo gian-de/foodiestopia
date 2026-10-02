@@ -9,6 +9,9 @@ namespace foodiestopia.Interfaces
         Task<PagedResult<PlaylistSummaryDTO>> GetAllPlaylistsAsync(int page, int pageSize, string sortBy, string sortDirection);
         Task<PlaylistSummaryDTO> GetPlaylistByFullSlugAsync(string fullSlug);
         Task<PagedResult<PlaylistSummaryDTO>> GetMyCreatedPlaylistsAsync(Guid userId, int page, int pageSize, string sortBy, string sortDirection);
+        Task<PagedResult<PlaylistSummaryDTO>> GetHeartedPlaylistsAsync(Guid userId, int page, int pageSize);
+        Task AddHeartedPlaylistAsync(Guid userId, Guid playlistId);
+        Task<bool> RemoveHeartedPlaylistAsync(Guid userId, Guid playlistId);
         Task<PlaylistSummaryDTO> CreatePlaylistAsync(Guid userId, PlaylistCreateRequestDTO playlistCreateDTO);
         Task<PlaylistSummaryDTO> UpdatePlaylistAsync(Guid userId, Guid playlistId, PlaylistUpdateRequestDTO playlistUpdateDTO);
         Task<PlaylistDeleteDTO> DeletePlaylistAsync(Guid userId, Guid playlistId);
