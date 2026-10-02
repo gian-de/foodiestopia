@@ -145,6 +145,89 @@ namespace foodiestopia.Services
             };
         }
 
+        public async Task AddHeartedPlaylistAsync(Guid userId, Guid playlistId)
+        {
+            bool userCheck = await _context.Users.AnyAsync(u => u.Id == userId);
+            if (!userCheck) throw new UnauthorizedAccessException("User that was passed to query was not found.");
+
+            var playlist = await _context.Playlists.FindAsync(playlistId);
+            if (playlist is null) throw new KeyNotFoundException("Playlist not found.");
+
+            bool alreadyHearted = await _context.HeartedPlaylists
+                .AnyAsync(h => h.UserId == userId && h.PlaylistId == playlistId);
+            if (alreadyHearted) throw new ArgumentException("You've hearted this playlist already.");
+
+            await _context.HeartedPlaylists.AddAsync(new HeartedPlaylist
+            {
+                UserId = userId,
+                PlaylistId = playlistId,
+            });
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> RemoveHeartedPlaylistAsync(Guid userId, Guid playlistId)
+        {
+            bool userCheck = await _context.Users.AnyAsync(u => u.Id == userId);
+            if (!userCheck) throw new UnauthorizedAccessException("User that was passed to query was not found.");
+
+            var hearted = await _context.HeartedPlaylists
+                .FirstOrDefaultAsync(h => h.UserId == userId && h.PlaylistId == playlistId);
+            if (hearted is null) return false;
+
+            _context.HeartedPlaylists.Remove(hearted);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<PagedResult<PlaylistSummaryDTO>> GetHeartedPlaylistsAsync(Guid userId, int page, int pageSize)
+        {
+            if (page < 1 || pageSize < 1) throw new ArgumentException("Page and or Page size must be greater than 0.");
+
+            var hearted = _context.HeartedPlaylists
+                .Where(h => h.UserId == userId)
+                .OrderByDescending(h => h.HeartedAt);
+
+            var total = await hearted.CountAsync();
+            var ids = await hearted
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(h => h.PlaylistId)
+                .ToListAsync();
+
+            var playlists = await _context.Playlists
+                .Where(p => ids.Contains(p.Id))
+                .Include(p => p.User)
+                .Include(p => p.HeartedByUsers)
+                .Include(p => p.PlaylistRecipes)
+                    .ThenInclude(pr => pr.Recipe)
+                        .ThenInclude(r => r.HeartedByUsers)
+                .Include(p => p.PlaylistRecipes)
+                    .ThenInclude(pr => pr.Recipe)
+                        .ThenInclude(r => r.User)
+                .Include(p => p.PlaylistRecipes)
+                    .ThenInclude(pr => pr.Recipe)
+                        .ThenInclude(r => r.Ratings)
+                .Include(p => p.PlaylistRecipes)
+                    .ThenInclude(pr => pr.Recipe)
+                        .ThenInclude(r => r.Country)
+                .ToListAsync();
+
+            var ordered = ids
+                .Select(id => playlists.FirstOrDefault(p => p.Id == id))
+                .Where(p => p is not null)
+                .Select(p => p!.ToPlaylistSummaryDTO())
+                .ToList();
+
+            return new PagedResult<PlaylistSummaryDTO>
+            {
+                TotalCount = total,
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(total / (double)pageSize),
+                Results = ordered
+            };
+        }
+
         public async Task<PlaylistSummaryDTO> CreatePlaylistAsync(Guid userId, PlaylistCreateRequestDTO playlistCreateDTO)
         {
             bool userCheck = await _context.Users.AnyAsync(u => u.Id == userId);

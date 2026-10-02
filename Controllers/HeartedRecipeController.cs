@@ -75,6 +75,10 @@ namespace foodiestopia.Controllers
             {
                 return BadRequest(new { ex.Message });
             }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, new { ex.Message });

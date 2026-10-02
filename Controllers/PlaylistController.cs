@@ -58,6 +58,83 @@ namespace foodiestopia.Controllers
         }
 
         [Authorize]
+        [HttpGet("hearted")]
+        public async Task<IActionResult> GetHeartedPlaylists(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                if (User.IsGuest()) return Unauthorized("Only registered users can view hearted playlists.");
+                var userId = User.GetUserIdFromClaims();
+                return Ok(await _playlistService.GetHeartedPlaylistsAsync(userId, page, pageSize));
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPost("{playlistId:guid}/heart")]
+        public async Task<IActionResult> AddHeartedPlaylist([FromRoute] Guid playlistId)
+        {
+            try
+            {
+                if (User.IsGuest()) return Unauthorized(new { Message = "Only verified users can heart playlists." });
+                var userId = User.GetUserIdFromClaims();
+                await _playlistService.AddHeartedPlaylistAsync(userId, playlistId);
+                return Ok(new { message = "Playlist hearted." });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { ex.Message });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("{playlistId:guid}/heart")]
+        public async Task<IActionResult> RemoveHeartedPlaylist([FromRoute] Guid playlistId)
+        {
+            try
+            {
+                if (User.IsGuest()) return Unauthorized(new { Message = "Only verified users can heart playlists." });
+                var userId = User.GetUserIdFromClaims();
+                var removed = await _playlistService.RemoveHeartedPlaylistAsync(userId, playlistId);
+                if (!removed) return NotFound(new { Message = "Playlist not found inside favorites." });
+                return Ok(new { message = "Playlist un-hearted." });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { ex.Message });
+            }
+        }
+
+        [Authorize]
         [HttpGet("my")]
         public async Task<IActionResult> GetMyCreatedPlaylists(
             [FromQuery] int page = 1,
