@@ -200,8 +200,20 @@ namespace foodiestopia.Services
             var country = await _context.Countries.FindAsync(recipeCreateDTO.CountryId);
             if (country is null) throw new ArgumentException($"Country with id {recipeCreateDTO.CountryId} couldn't be found.");
 
+            var imageUrls = (recipeCreateDTO.ImageUrls ?? new List<string>())
+                .Select(url => url.Trim())
+                .Where(url => url.Length > 0)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+            if (imageUrls.Count == 0 && !string.IsNullOrWhiteSpace(recipeCreateDTO.ImageUrl))
+                imageUrls.Add(recipeCreateDTO.ImageUrl.Trim());
+            if (imageUrls.Count == 0) throw new ArgumentException("Add at least one image.");
+            if (imageUrls.Count > 5) throw new ArgumentException("A recipe can have at most 5 images.");
+
+            recipeCreateDTO.ImageUrl = imageUrls[0];
+            recipeCreateDTO.ImageUrls = imageUrls;
+
             var recipeModel = recipeCreateDTO.ToRecipeModelFromDTO();
-            // attach UserId passed from controller to Model
             recipeModel.UserId = userId;
 
             _context.Recipes.Add(recipeModel);

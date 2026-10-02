@@ -37,7 +37,10 @@ namespace foodiestopia.Mappings.Playlists
                         DifficultyAverage: pr.Recipe.Ratings.Count > 0 ? (decimal)Math.Round(pr.Recipe.Ratings.Average(r => r.DifficultyRating), 2) : 0m,
                         HeartCount: pr.Recipe.HeartedByUsers.Count
                     )).ToList()
-            );
+            )
+            {
+                ImageUrl = playlistModel.ImageUrl
+            };
         }
     }
 }

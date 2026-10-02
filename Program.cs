@@ -171,6 +171,8 @@ using (var scope = app.Services.CreateScope())
 
 
     await AppDbSeeder.SeedAsync(userManager, roleManager);
+    var catalogDb = services.GetRequiredService<AppDbContext>();
+    await foodiestopia.Database.Seeds.CatalogSeed.SeedAsync(catalogDb);
 }
 
 // Configure the HTTP request pipeline.

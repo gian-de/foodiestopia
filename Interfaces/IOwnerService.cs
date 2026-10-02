@@ -10,5 +10,7 @@ namespace foodiestopia.Interfaces
         Task<UserInfoDTO> PromoteToSeniorAdminRoleAsync(Guid userId);
         Task<UserInfoDTO> DemoteToSeniorAdminRoleAsync(Guid userId);
         Task<UserInfoDTO> DemoteToAdminRoleAsync(Guid userId);
+        Task<OwnerUserDTO> FindUserAsync(string username);
+        Task DeleteUserAsync(Guid userId);
     }
 }

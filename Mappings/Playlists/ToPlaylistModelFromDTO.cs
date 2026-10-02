@@ -13,6 +13,7 @@ namespace foodiestopia.Mappings.Playlists
                 Name = playlistRequestDTO.Name,
                 SlugText = playlistRequestDTO.SlugText,
                 SlugNumber = playlistRequestDTO.SlugNumber.Value,
+                ImageUrl = playlistRequestDTO.ImageUrl.Trim(),
             };
         }
     }

@@ -10,6 +10,7 @@ namespace foodiestopia.Models
         public required string Name { get; set; }
         [Required(ErrorMessage = "Image url is required.")]
         public required string ImageUrl { get; set; }
+        public List<string> ImageUrls { get; set; } = new();
         [Required(ErrorMessage = "Prep time is required.")]
         [Range(0, 1440, ErrorMessage = "Prep time must be between 0 and 1440 minutes.")]
         public int PrepTimeMinutes { get; set; }

@@ -27,5 +27,6 @@ namespace foodiestopia.DTOs.Recipe
     )
     {
         public int TotalTimeMinutes => PrepTimeMinutes + CookTimeMinutes;
+        public List<string> ImageUrls { get; init; } = new();
     }
 }

@@ -9,6 +9,7 @@ namespace foodiestopia.DTOs.Recipe
         public string Name { get; set; } = string.Empty;
         public Guid CountryId { get; set; }
         public string ImageUrl { get; set; } = string.Empty;
+        public List<string> ImageUrls { get; set; } = new();
         [Required(ErrorMessage = "Prep time is required.")]
         [Range(0, 1440, ErrorMessage = "Prep time must be between 0 and 1440 minutes.")]
         public int PrepTimeMinutes { get; set; }

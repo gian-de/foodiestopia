@@ -13,6 +13,7 @@ namespace foodiestopia.Mappings.Recipes
                 Name = recipeRequestDTO.Name,
                 CountryId = recipeRequestDTO.CountryId,
                 ImageUrl = recipeRequestDTO.ImageUrl,
+                ImageUrls = recipeRequestDTO.ImageUrls ?? new List<string>(),
                 PrepTimeMinutes = recipeRequestDTO.PrepTimeMinutes,
                 CookTimeMinutes = recipeRequestDTO.CookTimeMinutes,
                 PublishedAt = recipeRequestDTO.PublishedAt,
