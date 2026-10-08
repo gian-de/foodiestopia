@@ -72,7 +72,7 @@ namespace foodiestopia.Services
         public Task SendEmailUsernameInfoAsync(string recipientEmail, string username)
         {
             string subject = "FOODIESTOPIA - Forgot Username";
-            string htmlBody = $"<p>Your login username is: <strong>{username}<strong></p>";
+            string htmlBody = $"<p>Your login username is: <strong>{System.Net.WebUtility.HtmlEncode(username)}</strong></p>";
 
             return SendEmailAsync(recipientEmail, subject, htmlBody);
         }

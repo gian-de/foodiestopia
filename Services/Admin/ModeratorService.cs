@@ -121,6 +121,7 @@ namespace foodiestopia.Services.Admin
                 pendingRecipeSubmission.VisibilityStatus = "approved";
                 pendingRecipeSubmission.ReviewFeedback = null;
                 recipeModel.VisibilityStatus = "public";
+                recipeModel.PublishedAt = DateTime.UtcNow;
             }
 
             pendingRecipeSubmission.ReviewedAt = DateTime.UtcNow;

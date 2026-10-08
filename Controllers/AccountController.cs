@@ -293,20 +293,28 @@ namespace foodiestopia.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var user = await _userManager.FindByEmailAsync(requestDTO.Email);
-            if (user is null) return BadRequest("Invalid payload.");
+            if (user is not null)
+            {
+                var resetPasswordToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                if (string.IsNullOrEmpty(resetPasswordToken))
+                    return StatusCode(500, new { Message = "Something went wrong when creating the reset token." });
 
-            var resetPasswordToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-            if (string.IsNullOrEmpty(resetPasswordToken)) return BadRequest("Something went wrong when creating the reset token.");
+                var tokenEncoded = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(resetPasswordToken));
+                var emailEncoded = Uri.EscapeDataString(user.Email ?? requestDTO.Email);
+                var passwordResetLink = $"{frontendUrl}/reset-password?token={tokenEncoded}&email={emailEncoded}";
+                await _emailService.SendEmailPasswordResetAsync(user.Email!, passwordResetLink);
+            }
 
-            var tokenEncoded = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(resetPasswordToken));
-            var emailEncoded = WebUtility.UrlEncode(user.Email);
+            return Ok(new { Message = "If an account with this email exists, a password reset link has been sent." });
+        }
 
-            var passwordResetLink = $"{frontendUrl}/api/account/reset-password?token={tokenEncoded}&email={emailEncoded}";
-
-            // null forgive 'user.email' since there's validation above line 154
-            await _emailService.SendEmailPasswordResetAsync(user.Email!, passwordResetLink);
-
-            return Ok(new { Message = "Email to reset your password has been sent." });
+        [HttpGet("reset-password")]
+        public IActionResult ResetPasswordLink([FromQuery] string? token, [FromQuery] string? email)
+        {
+            var next = $"{frontendUrl}/reset-password?token={Uri.EscapeDataString(token ?? "")}&email={Uri.EscapeDataString(email ?? "")}";
+            return Content(
+                $"<!doctype html><html><head><meta http-equiv=\"refresh\" content=\"0;url={next}\"></head><body><a href=\"{next}\">Continue to reset your password</a></body></html>",
+                "text/html");
         }
 
         [HttpPost("reset-password")]
@@ -323,9 +331,10 @@ namespace foodiestopia.Controllers
 
 
             var result = await _userManager.ResetPasswordAsync(user, decodedToken, requestDTO.Password);
-            if (!result.Succeeded) return BadRequest("Something went wrong.");
+            if (!result.Succeeded)
+                return BadRequest(new { Message = string.Join(" ", result.Errors.Select(e => e.Description)) });
 
-            return Ok("Password has been reset successfully.");
+            return Ok(new { Message = "Password has been reset successfully." });
         }
 
         [Authorize]
